@@ -1,5 +1,5 @@
 {
-  "name": "cyberjammies-feed-images",
+  "name": "pinkys-product-metafield-availability-sync",
   "module": "index.ts",
   "type": "module",
   "private": true,

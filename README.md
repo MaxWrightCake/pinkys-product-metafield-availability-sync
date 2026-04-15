@@ -1,2 +1,3 @@
-This project was created using `bun init` in bun v1.2.9. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
 # pinkys-product-metafield-availability-sync
+
+Ensures a products availability metafield reflects off stock levels. Excluded products with no metafield value set & customized products.
