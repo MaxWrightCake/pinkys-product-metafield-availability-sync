@@ -1,0 +1,20 @@
+{
+  "name": "cyberjammies-feed-images",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "scripts": {
+    "serve": "bun run index.js",
+    "start": "bun run index.js",
+    "build": "echo \"no build required\""
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "sharp": "^0.34.5"
+  }
+}
