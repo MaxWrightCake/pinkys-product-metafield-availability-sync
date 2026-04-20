@@ -103,19 +103,23 @@ const queryAllProducts = async () => {
     const products = data.data.products.nodes;
 
     for (const product of products) {
+        let lc_product_title = product.title.toLowerCase();
         if (product.status != 'ACTIVE') continue;
         if (product.tracksInventory === false) continue;
         if (product.availability_mf === null) continue;
         if (product.totalInventory <= 0 && product.availability_mf?.value == '> 8 weeks') continue;
         if (product.totalInventory > 0 && product.availability_mf?.value == 'In Stock') continue;
+        if (lc_product_title.includes('| estimator')) continue;
+        if (lc_product_title.includes('| standard sizes')) continue;
+        if (lc_product_title.includes('pre-sale')) continue;
 
         await writeProductToFile(product.id, product.availability_mf?.value, './data/products.json');
 
-        if (product.totalInventory <= 0 && product.availability_mf?.value != '> 8 weeks') {
-            await updateProductMetafieldAndLog(product, '> 8 weeks');
-        } else if (product.totalInventory > 0 && product.availability_mf?.value != 'In Stock') {
-            await updateProductMetafieldAndLog(product, 'In Stock');
-        }
+        // if (product.totalInventory <= 0 && product.availability_mf?.value != '> 8 weeks') {
+        //     await updateProductMetafieldAndLog(product, '> 8 weeks');
+        // } else if (product.totalInventory > 0 && product.availability_mf?.value != 'In Stock') {
+        //     await updateProductMetafieldAndLog(product, 'In Stock');
+        // }
     }
 
     const pageInfo = data.data.products.pageInfo;
@@ -127,7 +131,6 @@ const queryAllProducts = async () => {
 const updateProductMetafieldAndLog = async (product, status) => {
     const KEY = 'availability';
     const NAMESPACE = 'filters';
-
 
     const variables = {
         metafields: [
